@@ -1,0 +1,23 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Copilot / temp
+CopilotIndices/
+*.db
+*.sqlite
+
+# Build folders
+bin/
+obj/
+
+# VS Code / Rider
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
