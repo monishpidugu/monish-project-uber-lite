@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="RideBooking.API/RideBooking.API.csproj" />
+  <Project Path="RideBooking.Application/RideBooking.Application.csproj" />
+  <Project Path="RideBooking.Domain/RideBooking.Domain.csproj" />
+  <Project Path="RideBooking.Infrastructure/RideBooking.Infrastructure.csproj" />
+</Solution>
