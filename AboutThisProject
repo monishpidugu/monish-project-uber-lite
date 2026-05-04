@@ -1,0 +1,113 @@
+# 🚖 Ride Booking System (Uber-like Backend)
+
+## 📌 Overview
+This project is a backend system for a ride booking application built using **.NET Core** and **Clean Architecture**.
+
+It supports:
+- Ride creation
+- Driver assignment (nearest driver logic)
+- Ride lifecycle management (Start, Complete, Cancel)
+
+---
+
+## 🏗️ Architecture
+
+The project follows **Clean Architecture**:
+
+API → Application → Domain  
+      ↑  
+  Infrastructure  
+
+### Layers:
+
+- **API**: Controllers (entry point)
+- **Application**: Business logic (services, DTOs)
+- **Domain**: Entities and enums
+- **Infrastructure**: Database (EF Core, Repository)
+
+---
+
+## 🚀 Features
+
+### ✅ Ride Management
+- Create Ride
+- Assign Driver
+- Start Ride
+- Complete Ride
+- Cancel Ride
+
+### ✅ Driver Matching
+- Finds nearest available driver
+- Uses distance-based sorting
+
+### ✅ State Management
+- Requested → Accepted → InProgress → Completed
+- Controlled transitions with validations
+
+---
+
+## 🧠 Key Concepts Used
+
+- Clean Architecture
+- Repository Pattern
+- Dependency Injection
+- EF Core (Code First)
+- DTO Pattern
+
+---
+
+## 🔄 API Flow
+
+Client → Controller → Service → Repository → Database
+
+---
+
+## 🧪 API Endpoints
+
+### Create Ride
+POST /api/rides
+
+### Assign Driver
+POST /api/rides/{rideId}/assign-driver
+
+### Start Ride
+POST /api/rides/{rideId}/start
+
+### Complete Ride
+POST /api/rides/{rideId}/complete
+
+### Cancel Ride
+POST /api/rides/{rideId}/cancel
+
+---
+
+## 🛠️ Tech Stack
+
+- .NET Core Web API
+- Entity Framework Core
+- SQL Server
+- Swagger
+
+---
+
+## ⚠️ Limitations (Future Improvements)
+
+- No authentication
+- No concurrency handling
+- Uses basic distance calculation
+- No real-time updates
+
+---
+
+## 🚀 Future Enhancements
+
+- Real-time tracking (SignalR)
+- Payment integration
+- Geo-spatial indexing
+- Microservices architecture
+
+---
+
+## 👨‍💻 Author
+
+Monish
