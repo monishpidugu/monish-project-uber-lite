@@ -67,4 +67,65 @@ public class RideService : IRideService
 
         return ride.Id;
     }
+
+    public async Task StartRideAsync(Guid rideId)
+    {
+        var ride = await _repository.GetRideByIdAsync(rideId);
+
+        if (ride == null)
+            throw new Exception("Ride not found");
+
+        if (ride.Status != RideStatus.Accepted)
+            throw new Exception("Ride must be accepted before starting");
+
+        ride.Status = RideStatus.InProgress;
+
+        await _repository.SaveChangesAsync();
+    }
+
+    public async Task CompleteRideAsync(Guid rideId)
+    {
+        var ride = await _repository.GetRideByIdAsync(rideId);
+
+        if (ride == null)
+            throw new Exception("Ride not found");
+
+        if (ride.Status != RideStatus.InProgress)
+            throw new Exception("Ride must be in progress to complete");
+
+        ride.Status = RideStatus.Completed;
+
+        // Free the driver
+        if (ride.DriverId.HasValue)
+        {
+            var driver = await _repository.GetDriverByIdAsync(ride.DriverId.Value);
+            if (driver != null)
+                driver.IsAvailable = true;
+        }
+
+        await _repository.SaveChangesAsync();
+    }
+
+    public async Task CancelRideAsync(Guid rideId)
+    {
+        var ride = await _repository.GetRideByIdAsync(rideId);
+
+        if (ride == null)
+            throw new Exception("Ride not found");
+
+        if (ride.Status == RideStatus.Completed)
+            throw new Exception("Cannot cancel completed ride");
+
+        ride.Status = RideStatus.Cancelled;
+
+        // Free driver if already assigned
+        if (ride.DriverId.HasValue)
+        {
+            var driver = await _repository.GetDriverByIdAsync(ride.DriverId.Value);
+            if (driver != null)
+                driver.IsAvailable = true;
+        }
+
+        await _repository.SaveChangesAsync();
+    }
 }

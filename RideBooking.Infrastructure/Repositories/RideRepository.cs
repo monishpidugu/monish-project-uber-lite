@@ -34,4 +34,9 @@ public class RideRepository : IRideRepository
     {
         await _context.Rides.AddAsync(ride);
     }
+
+    public async Task<Driver?> GetDriverByIdAsync(Guid driverId)
+    {
+        return await _context.Drivers.FindAsync(driverId);
+    }
 }

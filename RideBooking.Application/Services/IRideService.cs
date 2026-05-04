@@ -7,5 +7,8 @@ namespace RideBooking.Application.Services
     {
         Task<Guid> CreateRideAsync(CreateRideRequest request);
         Task AssignDriverAsync(Guid rideId);
+        Task StartRideAsync(Guid rideId);
+        Task CompleteRideAsync(Guid rideId);
+        Task CancelRideAsync(Guid rideId);
     }
 }

@@ -30,4 +30,25 @@ public class RideController : ControllerBase
         await _rideService.AssignDriverAsync(rideId);
         return Ok("Driver assigned successfully");
     }
+
+    [HttpPost("{rideId}/start")]
+    public async Task<IActionResult> StartRide(Guid rideId)
+    {
+        await _rideService.StartRideAsync(rideId);
+        return Ok("Ride started");
+    }
+
+    [HttpPost("{rideId}/complete")]
+    public async Task<IActionResult> CompleteRide(Guid rideId)
+    {
+        await _rideService.CompleteRideAsync(rideId);
+        return Ok("Ride completed");
+    }
+
+    [HttpPost("{rideId}/cancel")]
+    public async Task<IActionResult> CancelRide(Guid rideId)
+    {
+        await _rideService.CancelRideAsync(rideId);
+        return Ok("Ride cancelled");
+    }
 }

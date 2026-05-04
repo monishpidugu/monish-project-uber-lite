@@ -11,5 +11,7 @@ namespace RideBooking.Application.Interfaces
         Task<List<Driver>> GetAvailableDriversAsync();
         Task SaveChangesAsync();
         Task AddRideAsync(Ride ride);
+
+        Task<Driver?> GetDriverByIdAsync(Guid driverId);
     }
 }
