@@ -1,4 +1,5 @@
 ﻿using RideBooking.Application.DTO;
+using RideBooking.Application.Exceptions;
 using RideBooking.Application.Helpers;
 using RideBooking.Application.Interfaces;
 using RideBooking.Domain.Entities;
@@ -19,12 +20,12 @@ public class RideService : IRideService
         var ride = await _repository.GetRideByIdAsync(rideId);
 
         if (ride == null)
-            throw new Exception("Ride not found");
+            throw new RideNotFoundException("Ride not found");
 
         var availableDrivers = await _repository.GetAvailableDriversAsync();
 
         if (!availableDrivers.Any())
-            throw new Exception("No drivers available");
+            throw new NoDriversAvailableException("No drivers available");
 
         var nearestDriver = availableDrivers
             .OrderBy(d => GeoHelper.CalculateDistance(
@@ -76,7 +77,8 @@ public class RideService : IRideService
             throw new Exception("Ride not found");
 
         if (ride.Status != RideStatus.Accepted)
-            throw new Exception("Ride must be accepted before starting");
+            throw new InvalidRideStateException(
+    "Ride must be accepted before starting");
 
         ride.Status = RideStatus.InProgress;
 

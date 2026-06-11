@@ -11,6 +11,7 @@ public class RideDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Driver> Drivers { get; set; }
     public DbSet<Ride> Rides { get; set; }
+    public DbSet<VehicleType> VehicleTypes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -24,5 +25,14 @@ public class RideDbContext : DbContext
         {
             entity.OwnsOne(d => d.CurrentLocation);
         });
+
+        modelBuilder.Entity<VehicleType>().HasData(
+            new VehicleType { Id = 1, Name = "Car" },
+            new VehicleType { Id = 2, Name = "Bike" },
+            new VehicleType { Id = 3, Name = "Auto" },
+            new VehicleType { Id = 4, Name = "SUV" }
+        );
     }
+
+
 }
